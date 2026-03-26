@@ -1,5 +1,8 @@
+# Imports
+. conf.ag
 a = "A" # a is 'A'
 b = "B"
+c = test
 $a''$b'C' >>
 "stdout" >>
 "stderr" >!

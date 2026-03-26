@@ -2,9 +2,11 @@
 	string = @/^".*?"$/
 	file_out = @/^>[>!]$/
 }
-$1 ~ /^[a-z_][a-z_0-9]*$/ && $3 ~ string {
+$1 ~ /^[a-z_][a-z_0-9]*$/ && $2 == "=" {
 	matched = 1
-	print $1"="$3
+	value = ""
+	if ($3 ~ string) value = $3
+	if (length(value)) print $1"="value
 }
 $2 ~ file_out {
 	matched = 1
@@ -14,6 +16,10 @@ $2 ~ file_out {
 	if ($3 ~ string) file = $3
 	print "echo", $1, fd, file
 }
+$1 == "." {
+	matched = 1
+	print "cat <(s", $2")"
+}
 !matched {
-	print $0
+	if (length()) print $0
 }
