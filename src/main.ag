@@ -1,0 +1,6 @@
+a = "A" # a is 'A'
+b = "B"
+$a''$b'C' >>
+"stdout" >>
+"stderr" >!
+"stdout+stderr" >&
